@@ -1,0 +1,12 @@
+.content{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+    width:100%;
+    /* max-width:375px; */
+    /* max-height:667px; */
+}
+.thumbnail{
+    width: "150px";
+    height: "150px";
+    border-radius: 50%;
+    object-fit:cover;
+}

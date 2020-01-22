@@ -1,0 +1,76 @@
+.content{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+    width:100%;
+    /* max-width:375px; */
+    /* max-height:667px; */
+}
+
+.menu{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.word_btn {
+	display: block;
+	position: relative;
+	width: 80px;
+	padding: 0.8em;
+	text-align: center;
+	text-decoration: none;
+    color: #818181;
+}
+.word_btn:hover {
+	 color: #1B1B1B;
+	 cursor: pointer;
+     text-decoration: none;
+     font-weight:bold;
+}
+
+.caption{
+    opacity: 0.5;
+    border:none;
+    background:none;
+}
+
+.preview{
+     border-radius: 50%;
+     object-fit:cover;
+
+}
+
+
+
+
+
+
+/* カテゴリ */
+.button1{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+    border-radius: 5px;
+
+}
+.active1{
+    background-color: crimson; 
+}
+
+/* 時間 */ 
+.button2{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+        border-radius: 5px;
+
+
+}
+.active2{
+    background-color: crimson; 
+}
+
+/* 変化 */ 
+.button3{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+    border-radius: 5px;
+
+}
+.active3{
+    background-color: crimson; 
+}
