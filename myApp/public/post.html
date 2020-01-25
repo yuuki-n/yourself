@@ -8,6 +8,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="post.css">
 
+    <script src="https://kit.fontawesome.com/af750d91d7.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+    <script src="./config.js"></script>
+
+
+    <script>
+
+        // cloudfirestoreの場所を定義する処理
+        var db = firebase.firestore().collection('post')
+
+        firebase.auth().onAuthStateChanged((user) => {
+            console.log(user);
+
+            //------------------------------------
+            // 未ログイン状態で訪れた場合
+            //------------------------------------
+            if (user === null) {
+                showMessage('Not Login', 'ログインが必要な画面です');
+                return (false);
+            }
+        });
+
+
+    </script>
 
 </head>
 

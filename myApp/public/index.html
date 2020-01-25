@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="index.css">
+
+  <script src="https://kit.fontawesome.com/af750d91d7.js" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
+  <script src="./config.js"></script>
+</head>
+
+
+<script>
+  // Initialize the FirebaseUI Widget using Firebase. 
+  // var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+
+  //----------------------------------------------
+  // Firebase UIの設定
+  //----------------------------------------------
+
+  // メールアドレス認証    新規アカウント作成
+  $(function () {
+    $('#register').on('click', function () {
+      var email = $('#mailaddress').val();
+      var pass = $('#password').val();
+      firebase.auth().createUserWithEmailAndPassword(email, pass)
+        .then(user => {
+          console.log('アカウント作成成功');
+        })
+        .catch(function (error) {
+          alert('登録できません（' + error.message + '）');
+        });
+    });
+  });
+
+
+    // 作成に失敗した時の処理
+    // firebase.auth().createUserWithEmailAndPassword(email, password)
+    //     .catch(function (error) {
+    //         alert('登録できません（' + error.message + '）');
+    //     });
+
+
+
+    // メールアドレス認証    ログイン
+    // $('#login').on('click', function () {
+    //     var email = $('#mailaddress').val();
+    //     var pass = $('#password').val();
+    //     firebase.auth().signInWithEmailAndPassword(email, password)
+    //         .then(user => {
+    //             // ログイン成功
+    //             // ページを移動する、ユーザーの情報を取得して処理を行う、等する
+    //             location.href = '/post.html';
+    //             // user.uid をユーザーIDとして使用する
+    //         }, err => {
+    //             // エラーを表示する等
+    //         });
+
+    // });
+
+    // 認証状態の確認
+        // firebase.auth().onAuthStateChanged(function (user) {
+        //     if (user) {
+
+        //         // ログイン状態の処理
+
+        //     }
+        //     else {
+
+        //         // ログアウト状態の処理
+
+        //     }
+        // });
+
+
+
+
+
+
+
+
+    // 存在確認済のメールアドレスかどうか(true or false)
+    // var verified = firebase.auth().currentUser.emailVerified;
+    // console.log(verified);
+
+    // // 未確認のメールアドレスの場合、メールを送信する
+    // if (!verified) {
+    //     // メール送信処理
+    //     firebase.auth().currentUser.sendEmailVerification();
+
+    //     var email = firebase.auth().currentUser.email;
+    //     console.log('確認メールを送信しました。', email);
+    // }
+
+    // $(function () {
+    //     $('#login').on('click', function () {
+    //         var email = $('#mailaddress').val();
+    //         var pass = $('#password').val();
+    //         firebase.auth().signInWithEmailAndPassword(email, password)
+    //             .catch(function (error) {
+    //                 alert('ログインできません（' + error.message + '）');
+    //             });
+    //     });
+    // });
+
+
+    // Googleログイン用
+    // const uiConfig = {
+    //     callbacks: {
+    //         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+    //             return true;
+    //         },
+    //         uiShown: function () {
+    //             document.getElementById('loader').style.display = 'none';
+    //         }
+    //     },
+    //     signInFlow: 'popup',
+    //     signInSuccessUrl: 'my',
+    //     signInOptions: [
+    //         firebase.auth.GoogleAuthProvider.PROVIDER_ID, // Google
+    //     ],
+    // };
+    // // サインアップ/サインインフォームのUI
+    // const ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+
+
+<body>
+  <div class="content">
+    <header>
+      <i class="fas fa-bars"></i>
+    </header>
+
+    <main>
+      <h1>YOURSELF</h1>
+      <!-- <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div> -->
+
+
+      <form class="form-group">
+        <div>
+          <input type="email" id="mailaddress" placeholder="メールアドレス" required>
+          <!-- <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> -->
+        </div>
+
+        <div>
+          <input type="password" id="password" placeholder="パスワード(半角英数8桁以上)" minlength="8" required>
+          <!-- <i class="fas fa-key" aria-hidden="true"></i> -->
+        </div>
+
+        <div>
+          <button class="button" id="login">ログイン</button>
+          <button class="button" id="register">新規登録</button>
+        </div>
+      </form>
+
+      <!-- <div>
+                <button class="button" id="submit">新規登録</button>
+            </div> -->
+
+    </main>
+
+  </div>
+
+
+  <script>
+
+
+  </script>
+
+
+</body>
+
+</html>
