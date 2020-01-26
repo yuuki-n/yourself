@@ -7,27 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="post0111.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/af750d91d7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="mypage.css">
 
-    <script src="https://kit.fontawesome.com/af750d91d7.js" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
     <script src="./config.js"></script>
-
     <script>
 
         // cloudfirestoreの場所を定義する処理
         var db = firebase.firestore().collection('post')
 
-        // サインインしていなかったら、indexに飛ばす
-        firebase.auth().onAuthStateChanged((user) => {
-            if (!user) {
-                location.href = '/index.html';
-            } else {
-                // サインイン済み
-            }
-        });
+        // // サインインしていなかったら、indexに飛ばす
+        // firebase.auth().onAuthStateChanged((user) => {
+        //     if (!user) {
+        //         location.href = '/index.html';
+        //     } else {
+        //         // サインイン済み
+        //     }
+        // });
+
+
+        // // サインインしていなかったら、indexに飛ばす
+        var user = firebase.auth().currentUser;
+
+        if (user) {
+            // User is signed in.
+        } else {
+            // No user is signed in.
+            location.href = '/index.html';
+        }
+
 
     </script>
 

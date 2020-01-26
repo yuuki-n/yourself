@@ -6,44 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/af750d91d7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="post.css">
 
-    <script src="https://kit.fontawesome.com/af750d91d7.js" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase-auth.js"></script>
     <script src="./config.js"></script>
-
-
-    <script>
-
-        // cloudfirestoreの場所を定義する処理
-        var db = firebase.firestore().collection('post')
-
-        firebase.auth().onAuthStateChanged((user) => {
-            console.log(user);
-
-            //------------------------------------
-            // 未ログイン状態で訪れた場合
-            //------------------------------------
-            if (user === null) {
-                showMessage('Not Login', 'ログインが必要な画面です');
-                return (false);
-            }
-        });
-
-
-    </script>
-
 </head>
+
+<!-- <script>
+
+    // cloudfirestoreの場所を定義する処理
+    // var db = firebase.firestore().collection('post')
+
+    // firebase.auth().onAuthStateChanged((user) => {
+    //     console.log(user);
+
+    //     //------------------------------------
+    //     // 未ログイン状態で訪れた場合
+    //     //------------------------------------
+    //     if (user === null) {
+    //         showMessage('Not Login', 'ログインが必要な画面です');
+    //         return (false);
+    //     }
+    // });
+
+
+</script> -->
+
 
 <body>
     <div class="content">
         <div class="wrap_box">
 
             <div class="menu">
-                <i class="fas fa-angle-left fa-2x"></i>
-                <a href="#" id="send" class="word_btn">送信</a>
+                <i class="fas fa-angle-left fa-2x" id="back"></i>
+                <a href="#" id="send" class="word_btn">投稿</a>
                 <!-- <button class="submit">送信</button> -->
             </div>
 
@@ -55,39 +56,102 @@
                 <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
                 <form>
                     <label for="image_url">
-                        <i class="fas fa-camera"></i>
+                        <i class="fas fa-camera fa-2x"></i>
                         <input type="file" name="upfile" id="image_url" style="display:none;" accept="image/*"
-                            capture="camera">
+                            capture="camera" required>
                     </label>
                     <!-- <img src="IMG_1117.PNG" alt="買ったものの画像" class="thumbnail"> -->
-                    <input type="text" id="product_name" class="caption" placeholder="キャプションを書く"></input>
+                    <input type="text" id="product_name" class="caption" placeholder="キャプションを書く" required></input>
                 </form>
 
                 <div>
+                    <div>
+                        <p>カテゴリを選択</p>
+                        <button class="button1" name="button1" id="electronics" value="">家電</button>
+                        <button class="button1" id="beauty" value="">美容</button>
+                        <button class="button1" id="fashion" value="ファッション">ファッション</button>
+                    </div>
 
-                    <p>カテゴリを選択</p>
-                    <button class="button1" name="button1" id="electronics" value="">家電</button>
-                    <button class="button1" id="beauty" value="">美容</button>
-                    <button class="button1" id="fashion" value="ファッション">ファッション</button>
-                    <!-- <hr class="category-endline"> -->
+                    <div>
+                        <p>時間を選択</p>
+                        <div class="time">
+                            <!-- 朝 -->
+                            <button class="button2" id="morning" value="">
+                                <div class="sun">
+                                    <svg width="50" height="20" viewBox="0 0 50 20" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M43.75 18L38.8125 14.46L41.25 9L35 8.31L34.375 2.4L28.6875 4.74L25 0L21.3125 4.74L15.625 2.4L14.9062 8.4L8.75 9L11.1875 14.46L6.25 18H0V21H50V18H43.75ZM12.5 18C12.6111 14.8549 13.9607 11.8673 16.2766 9.64018C18.5925 7.41303 21.7022 6.11213 24.9781 6C28.2581 6.10141 31.3756 7.39478 33.7002 9.61856C36.0247 11.8423 37.3829 14.8306 37.5 17.979L12.5 18Z"
+                                            fill="#F5DA94" />
+                                    </svg>
+                                    朝<p class="timezone">5:00〜9:59</p>
+                                </div>
+                            </button>
+                            <!-- </div> -->
+
+                            <!-- <div> -->
+                            <!-- 昼 -->
+                            <button class="button2" id="daytime" value="">
+                                <i class="fas fa-sun fa-2x sunshine"></i>
+                                昼<p class="timezone">10:00〜16:59</p>
+                            </button>
+                            <!-- </div> -->
+
+                            <!-- <div> -->
+                            <!-- 夜 -->
+                            <button class="button2" id="night" value=""> <i class="fas fa-moon fa-2x moon"></i>
+                                夜<p class="timezone">17:00〜4:59</p>
+                            </button>
+                            <!-- </div> -->
+                        </div>
+
+                        <div>
+                            <p>変化を選択</p>
+                            <button class="button3" id="change1" value="時短になった">時短になった</button>
+                            <button class="button3" id="change2" value="楽しくなった">楽しくなった</button>
+                            <button class="button3" id="change3" value="規則正しくなった">規則正しくなった</button>
+                            <button class="button3" id="change4" value="社交的になった">社交的になった</button>
+                        </div>
+
+                        <!-- その他でテキスト入力可能 -->
+                        <!-- <div>
+                            <label>
+                                <button class="button3" id="change5" value="その他" name="option">その他</button>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="other" class="other_label disabled">その他を選択した方は、詳細記入ください。</label>
+                            <input type="text" class="form-control" id="inputother" placeholder="" disabled="disabled">
+                        </div>
+                        </form> -->
 
 
+                        <div>
+                            <span class="fa-stack" id="post">
+                                <i class="far fa-circle fa-stack-2x circle"></i>
+                                <i class="far fa-paper-plane fa-stack-1x plane"></i>
+                            </span>
 
-                    <p>時間を選択</p>
-                    <button class="button2" id="morning" value="">朝</button>
-                    <button class="button2" id="daytime" value="">昼</button>
-                    <button class="button2" id="night" value="">夜</button>
-                    <!-- <hr class="timezone-endline"> -->
+                            <!-- <svg width="95" height="94" viewBox="0 0 95 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d)">
+                            <circle cx="47.5" cy="41.5" r="33.5" fill="#4BDDA8" />
+                        </g>
+                        <defs>
+                            <filter id="filter0_d" x="0" y="0" width="95" height="95" filterUnits="userSpaceOnUse"
+                                color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                <feOffset dy="6" />
+                                <feGaussianBlur stdDeviation="7" />
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                            </filter>
+                        </defs>
+                    </svg> -->
 
-                    <p>変化を選択</p>
-                    <button class="button3" id="change1" value="時短になった">時短になった</button>
-                    <button class="button3" id="change2" value="楽しくなった">楽しくなった</button>
-                    <button class="button3" id="change3" value="規則正しくなった">規則正しくなった</button>
-                    <button class="button3" id="change4" value="社交的になった">社交的になった</button>
-
-
-                </div>
-                <hr>
+                        </div>
             </main>
         </div>
     </div>
@@ -97,6 +161,14 @@
 </html>
 
 <script>
+
+    // TOPに戻る
+    $("#back").click(function () {
+        // if (confirm('ページ遷移しますか？')) 
+        {
+            window.location.href = 'https://yourself-899de.firebaseapp.com/';
+        }
+    });
 
     // 画像をプレビューする
     // $('#image_url').on('change', function (e) {
@@ -261,6 +333,21 @@
     });
 
 
+    // その他ボタンをテキスト入力可能にする
+    // $(function () {
+    //     $('change5').change(function () {
+    //         var radioval = $(this).val();
+    //         if (radioval == その他) {
+    //             $('#inputother').removeAttr('disabled');
+    //             $('.other_label').removeClass('disabled');
+    //         } else {
+    //             $('#inputother').attr('disabled', 'disabled');
+    //             $('.other_label').addClass('disabled');
+    //         }
+    //     });
+    // });
+
+
 
     // カテゴリボタンの色を変更する
     $(function () {
@@ -286,6 +373,47 @@
         });
     });
 
+
+    // 全てのボタンが選択されたら、投稿ボタン・投稿アイコンが押せるようになる
+    // $('#checkbox').change(function () {
+
+
+    // $('#send').prop('disabled', false);
+
+
+
+
+
+    // $('#post').prop('disabled', false);
+
+
+    // 全てのボタンを押さないと、投稿ボタンがグレーアウト
+    // 無効状態からスタート
+    // $('.send').prop("disabled,true");
+
+    // $('form input:required').each(function () {
+    // $(this).prev("lebel").addclass("required");
+    // });
+
+    // // 押したら
+    // $('form input:required').change(function () {
+    // // 空のフラグ
+    // let flag = true;
+    // // 必須箇所のチェック
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // 日時を取得する関数
     function getNowDatetime() {
         const date = new Date();
@@ -299,7 +427,7 @@
     }
 
 
-    // 送信ボタンクリックで投稿
+    // 投稿ボタンクリックで投稿
     $('#send').on('click', function () {
         const data = {
             // img_url: $('#img_url').val(),
@@ -322,6 +450,32 @@
         $('#time').val('');
         $('#change').val('');
     });
+
+    // 投稿アイコンクリックで投稿
+    $('#post').on('click', function () {
+        const data = {
+            // img_url: $('#img_url').val(),
+            img_url: imageUrl,
+            product_name: $('#product_name').val(),
+            created_at: getNowDatetime(),
+            category: $('.button1').val(),
+            time: $('.button2').val(),
+            change: $('.button3').val(),
+
+        };
+
+
+        // console.log(data);
+
+        db.add(data);
+        $('#img_url').val('');
+        $('#product_name').val('');
+        $('#category').val('');
+        $('#time').val('');
+        $('#change').val('');
+    });
+
+
 
 
 

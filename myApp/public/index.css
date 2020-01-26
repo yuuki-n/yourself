@@ -1,11 +1,67 @@
 .content{
     font-family:'TsukuARdGothic-Regular',sans-serif;
+    font-size: 14px;
+    color:#423738;
     width:100%;
     /* max-width:375px; */
     /* max-height:667px; */
+    background-color: #FFFEFA;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.logo{
+    margin-top:150px;
+}
+
+.signin{
+    display: flex;
+    flex-direction: column;
+}
+
+.email{
+    border-radius: 5px;
+    background: #EEEEEE;
+    opacity: 0.5;
+
+    width: 345px;
+    height: 30px;
+}
+
+.password{
+    border-radius: 5px;
+    background: #EEEEEE;
+    opacity: 0.5;
+
+    width: 345px;
+    height: 30px;
 }
 
 .button{
+    display: flex;
+    flex-direction: column;
+    margin-top:80px;
+}
+
+.login{
     font-family:'TsukuARdGothic-Regular',sans-serif;
-    border-radius: 5px;
+    border-radius: 35px;
+    width:340px;
+    height:50px;
+    font-size:20px;
+
+    background-color:#D39094;
+    color:#FFFFFF;
+    margin:5px;
+
+}
+.register{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+    border-radius: 35px;
+    width:340px;
+    height:50px;
+    font-size:20px;
+
+    margin:5px; 
 }
