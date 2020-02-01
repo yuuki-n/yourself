@@ -19,7 +19,9 @@
     <script>
 
         // cloudfirestoreの場所を定義する処理
-        var db = firebase.firestore().collection('post')
+        // var db = firebase.firestore().collection('post')
+        var db = firebase.firestore();
+
 
         // // サインインしていなかったら、indexに飛ばす
         // firebase.auth().onAuthStateChanged((user) => {
@@ -32,14 +34,14 @@
 
 
         // // サインインしていなかったら、indexに飛ばす
-        var user = firebase.auth().currentUser;
+        // var user = firebase.auth().currentUser;
 
-        if (user) {
-            // User is signed in.
-        } else {
-            // No user is signed in.
-            location.href = '/index.html';
-        }
+        // if (user) {
+        //     // User is signed in.
+        // } else {
+        //     // No user is signed in.
+        //     location.href = '/index.html';
+        // }
 
 
     </script>
