@@ -84,15 +84,26 @@
               <input type="password" class="password" id="password" minlength="8" required>
             </div>
 
+            <!-- <div class="button">
+              <button class="login" id="login"　>ログイン</button>
+              <button class="register" id="register">新規登録</button> -->
+
             <div class="button">
-              <button class="login" id="login">ログイン</button>
-              <button class="register" id="register">新規登録</button>
-
-              <div id="firebaseui-auth-container"></div>
-
+              <input type="button" class="register" value="新規登録" onclick="signUp()" />
+              <input type="button" class="login" value="ログイン" onclick="signIn()" />
+              <input type="button" class="register" value="ログアウト" onclick="signOut()" />
+              <p id="log"></p>
+              <p id="state"></p>
             </div>
 
-          </form>
+            <!-- このファイルに認証用の処理を実装します。
+            <script src="firebase-auth.js"></script> -->
+
+            <div id="firebaseui-auth-container"></div>
+
+        </div>
+
+        </form>
 
     </main>
 
@@ -105,154 +116,171 @@
     //----------------------------------------------
 
     // メールアドレス認証    新規アカウント作成
-    // $('#register').on('click', function () {
+    function signUp() {
+      var email = document.getElementById('mailaddress').value;
+      var password = document.getElementById('password').value;
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(function (result) {
+          console.log(result);
+          location.href = '/toppage.html'
+          document.getElementById('log').innerText = 'サインアップ成功';
+        }).catch(function (error) {
+          console.log('signup error')
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          document.getElementById('log').innerText = 'サインアップ失敗: ' + errorCode + ', ' + errorMessage;
+        });
+    }
+
+
+    // メールアドレス認証    ログイン
+    // $(function () {
+    // $('#login').on('click', function () {
     //   var email = $('#mailaddress').val();
     //   var pass = $('#password').val();
-    //   firebase.auth().createUserWithEmailAndPassword(email, pass)
+    //   console.log(email);
+    //   firebase.auth().signInWithEmailAndPassword(email, pass)
     //     .then(user => {
-    //       // console.log('アカウント作成成功');
-    //       // var user = firebase.auth().currentUser;
-    //       // })
-    //       firebase.firestore().collection('/users').doc(user.uid).set({
-    //         uid: user.uid,
-    //         created: getNowDatetime(),
-    //       })
-    //         .catch(function (error) {
-    //           alert('登録できません（' + error.message + '）');
-    //         });
-    //       location.href = '/toppage.html'
+    //       // ログイン成功
+    //       var user = firebase.auth().currentUser;
+    //       // ページを移動する、ユーザーの情報を取得して処理を行う、等する
+    //       location.href = '/toppage.html';
+    //       // user.uid をユーザーIDとして使用する
+    //     }, err => {
+    //       // エラーを表示する等
+    //       alert('ログインできません')
     //     });
     // });
+    // });
 
-    // location.href = '/toppage.html'
-    // })
-    // 
+    // ログイン
+    function signIn() {
+      var email = document.getElementById('mailaddress').value;
+      var password = document.getElementById('password').value;
 
-
-
-    // メールアドレス認証    新規アカウント作成
-    $(function () {
-      $('#register').on('click', function () {
-        var email = $('#mailaddress').val();
-        var pass = $('#password').val();
-        firebase.auth().createUserWithEmailAndPassword(email, pass)
-          .then(user => {
-            console.log('アカウント作成成功');
-          })
-          .catch(function (error) {
-            alert('登録できません（' + error.message + '）');
-          });
-      });
-      // });
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function (result) {
+          location.href = '/toppage.html'
+          document.getElementById('log').innerText = 'サインイン成功';
+        }).catch(function (error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          document.getElementById('log').innerText = 'サインイン失敗: ' + errorCode + ', ' + errorMessage;
+        });
+    }
 
 
 
-      // メールアドレス認証    ログイン
-      // $(function () {
-      $('#login').on('click', function () {
-        var email = $('#mailaddress').val();
-        var pass = $('#password').val();
-        console.log(email);
-        firebase.auth().signInWithEmailAndPassword(email, pass)
-          .then(user => {
-            // ログイン成功
-            var user = firebase.auth().currentUser;
-            // ページを移動する、ユーザーの情報を取得して処理を行う、等する
-            location.href = '/toppage.html';
-            // user.uid をユーザーIDとして使用する
-          }, err => {
-            // エラーを表示する等
-            alert('ログインできません')
-          });
-      });
-      // });
+    // Googleアカウント認証
+    var uiConfig = {
+      // ログイン完了時のリダイレクト先
+      signInSuccessUrl: '/toppage.html',
+
+      credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+
+      // 利用する認証機能
+      signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID  //メール認証
+      ],
 
 
-      // Googleアカウント認証
-
-      var uiConfig = {
-        // ログイン完了時のリダイレクト先
-        signInSuccessUrl: '/toppage.html',
-
-        credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-
-        // 利用する認証機能
-        signInOptions: [
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          firebase.auth.EmailAuthProvider.PROVIDER_ID  //メール認証
-        ],
+      // 利用規約のURL(任意で設定)
+      // tosUrl: 'http://example.com/kiyaku/',
+      // プライバシーポリシーのURL(任意で設定)
+      // privacyPolicyUrl: 'https://privacy.html'
 
 
-        // 利用規約のURL(任意で設定)
-        // tosUrl: 'http://example.com/kiyaku/',
-        // プライバシーポリシーのURL(任意で設定)
-        // privacyPolicyUrl: 'https://privacy.html'
+    };
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+    // });
+
+    // ユーザー情報取得
+    //   this.userId = firebase.auth().currentUser.uid
+    //   firebase.firestore().collection('/users').doc(user.uid).set({
+    //     // db.collection('users').doc(user.uid).set({
+    //     uid: user.uid,
+    //     // created: getNowDatetime(),
+    //   }).catch(function (error) {
+    //     console.log("Error writing document: ", error);
+    //   });
+    // });
+    // });
+
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   firebase.firestore().collection('/users').doc(user.uid).set({
+    //     uid: user.uid,
+    //   }).catch(function (error) {
+    //     console.error("Error writing document: ", error);
+    //   });
+    // });
+
+    // ユーザー情報取得
+
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   firebase.firestore().collection('/users').doc(user.uid).set({
+    //     // db.collection('users').doc(user.uid).set({
+    //     uid: user.uid,
+    //     // created: getNowDatetime(),
+    //   }).catch(function (error) {
+    //     console.error("Error writing document: ", error);
+    //   });
+    // });
 
 
-      };
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      ui.start('#firebaseui-auth-container', uiConfig);
-      // });
-
-      // ユーザー情報取得
-      // constructor(){
-      //   this.userId = firebase.auth().currentUser.uid
-      //   firebase.firestore().collection('/users').doc(user.uid).set({
-      //     // db.collection('users').doc(user.uid).set({
-      //     uid: user.uid,
-      //     // created: getNowDatetime(),
-      //   }).catch(function (error) {
-      //     console.log("Error writing document: ", error);
-      //   });
-      // });
-      // });
-
-      // firebase.auth().onAuthStateChanged((user) => {
-      //   firebase.firestore().collection('/users').doc(user.uid).set({
-      //     uid: user.uid,
-      //   }).catch(function (error) {
-      //     console.error("Error writing document: ", error);
-      //   });
-      // });
-
-      // ユーザー情報取得
-
-      // firebase.auth().onAuthStateChanged((user) => {
-      //   firebase.firestore().collection('/users').doc(user.uid).set({
-      //     // db.collection('users').doc(user.uid).set({
-      //     uid: user.uid,
-      //     // created: getNowDatetime(),
-      //   }).catch(function (error) {
-      //     console.error("Error writing document: ", error);
-      //   });
-      // });
+    // 日時を取得する関数
+    function getNowDatetime() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      const day = ('0' + date.getDate()).slice(-2);
+      const hour = ('0' + date.getHours()).slice(-2);
+      const min = ('0' + date.getMinutes()).slice(-2);
+      const sec = ('0' + date.getSeconds()).slice(-2);
+      return `${year}-${month}-${day}T${hour}:${min}:${sec}`
+    }
 
 
-      // 日時を取得する関数
-      function getNowDatetime() {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = ('0' + (date.getMonth() + 1)).slice(-2);
-        const day = ('0' + date.getDate()).slice(-2);
-        const hour = ('0' + date.getHours()).slice(-2);
-        const min = ('0' + date.getMinutes()).slice(-2);
-        const sec = ('0' + date.getSeconds()).slice(-2);
-        return `${year}-${month}-${day}T${hour}:${min}:${sec}`
+    // uidをfirestoreに格納
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   // console.log(user)
+    //   firebase.firestore().collection('/users').doc(user.uid).set({
+    //     uid: user.uid,
+    //     //   .then(function () {
+    //     //     console.log("Document successfully written!");
+    //   })
+    //     .catch(function (error) {
+    //       console.error("Error writing document: ", error);
+    // });
+
+
+    // ログイン確認
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // ログイン認証済
+        console.log('auth user', user);
+        document.getElementById('state').innerText = 'ログイン済(email: ' + user.email + ')';
+      } else {
+        // No user is signed in.
+        document.getElementById('state').innerText = '未ログイン';
       }
-
-
-      // uidをfirestoreに格納
-      // firebase.auth().onAuthStateChanged((user) => {
-      //   // console.log(user)
-      //   firebase.firestore().collection('/users').doc(user.uid).set({
-      //     uid: user.uid,
-      //     //   .then(function () {
-      //     //     console.log("Document successfully written!");
-      //   })
-      //     .catch(function (error) {
-      //       console.error("Error writing document: ", error);
-      // });
     });
+
+
+    // ログアウト
+    function signOut() {
+      firebase.auth().signOut().then(function () {
+        document.getElementById('log').innerText = 'サインアウト成功';
+      }).catch(function (error) {
+        console.log(error);
+        document.getElementById('log').innerText = 'サインアウト失敗';
+      });
+    }
+
+
+    // });
 
   </script>
 

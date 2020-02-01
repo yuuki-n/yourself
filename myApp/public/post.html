@@ -17,49 +17,47 @@
     <script src="./config.js"></script>
 </head>
 
-<!-- <script>
+<script>
 
     // cloudfirestoreの場所を定義する処理
-    // var db = firebase.firestore().collection('post')
+    var db = firebase.firestore().collection('post')
 
-    // firebase.auth().onAuthStateChanged((user) => {
-    //     console.log(user);
+    firebase.auth().onAuthStateChanged((user) => {
+        console.log(user);
 
-    //     //------------------------------------
-    //     // 未ログイン状態で訪れた場合
-    //     //------------------------------------
-    //     if (user === null) {
-    //         showMessage('Not Login', 'ログインが必要な画面です');
-    //         return (false);
-    //     }
-    // });
+        //     //------------------------------------
+        //     // 未ログイン状態で訪れた場合
+        //     //------------------------------------
+        if (user === null) {
+            showMessage('Not Login', 'ログインが必要な画面です');
+            return (false);
+        }
+    });
 
 
-</script> -->
+</script>
 
 
 <body>
     <div class="content">
         <div class="wrap_box">
 
-            <div class="menu">
-                <i class="fas fa-angle-left fa-2x" id="topback"></i>
-                <!-- <a href="#" id="send" class="word_btn">投稿</a> -->
-            </div>
+            <!-- <div class="menu"> -->
+            <!-- <i class="fas fa-angle-left fa-2x" id="topback"></i> -->
+            <!-- <a href="#" id="send" class="word_btn">投稿</a> -->
+            <!-- </div> -->
 
             <main>
 
                 <div id="img_url" class="preview"></div>
                 <!-- <img id="preview"> -->
 
-                <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
                 <form>
                     <label for="image_url">
                         <i class="fas fa-camera fa-2x"></i>
                         <input type="file" name="upfile" id="image_url" style="display:none;" accept="image/*"
                             capture="camera" required>
                     </label>
-                    <!-- <img src="IMG_1117.PNG" alt="買ったものの画像" class="thumbnail"> -->
                     <input type="text" id="product_name" class="caption" placeholder="キャプションを書く" required></input>
                 </form>
 
@@ -152,9 +150,22 @@
 
                         </div>
             </main>
+
+
+            <footer>
+                <hr>
+                <!-- 投稿 -->
+                <button type="button" id="postpage">
+                    <i class="fas fa-plus-square"></i>
+                </button>
+
+                <!-- マイページ -->
+                <button type="button" id="mypage">
+                    <i class="fas fa-user-circle"></i>
+                </button>
+            </footer>
         </div>
     </div>
-
 </body>
 
 </html>
@@ -417,7 +428,7 @@
     }
 
 
-    var user = firebase.auth().currentUser;
+    // var user = firebase.auth().currentUser;
 
 
     // 投稿ボタンクリックで投稿
@@ -454,7 +465,7 @@
             category: $('.button1').val(),
             time: $('.button2').val(),
             change: $('.button3').val(),
-            uid: user,
+            // uid: user,
         };
 
 
@@ -469,7 +480,15 @@
     });
 
 
+    // 投稿ページに遷移
+    $('#postpage').on('click', function () {
+        location.href = '/toppage.html';
+    });
 
+    // マイページに遷移
+    $('#mypage').on('click', function () {
+        location.href = '/mypage.html';
+    });
 
 
 

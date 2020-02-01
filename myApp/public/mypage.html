@@ -19,30 +19,22 @@
     <script>
 
         // cloudfirestoreの場所を定義する処理
-        // var db = firebase.firestore().collection('post')
-        var db = firebase.firestore();
+        var db = firebase.firestore().collection('post')
+        // var db = firebase.firestore();
 
 
         // // サインインしていなかったら、indexに飛ばす
-        // firebase.auth().onAuthStateChanged((user) => {
-        //     if (!user) {
-        //         location.href = '/index.html';
-        //     } else {
-        //         // サインイン済み
-        //     }
-        // });
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                location.href = '/index.html';
+            } else {
+                // サインイン済み
+            }
+        });
 
 
         // // サインインしていなかったら、indexに飛ばす
         // var user = firebase.auth().currentUser;
-
-        // if (user) {
-        //     // User is signed in.
-        // } else {
-        //     // No user is signed in.
-        //     location.href = '/index.html';
-        // }
-
 
     </script>
 
@@ -60,43 +52,61 @@
                 <div>
                     <div id="output" class="output"></div>
         </main>
+
+        <footer>
+            <hr>
+            <!-- 投稿 -->
+            <button type="button" id="postpage">
+                <i class="fas fa-plus-square"></i>
+            </button>
+
+            <!-- マイページ -->
+            <button type="button" id="mypage">
+                <i class="fas fa-user-circle"></i>
+            </button>
+        </footer>
+
     </div>
+
+
+    <script>
+        //  < !--  データをリアルタイムに取得する処理 'time'新しい順 desc:降順 -->
+        // $('#output').css('border-radius', '50%');
+
+        $(function () {
+            db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
+                let str = '';
+                querySnapshot.forEach(function (doc) {
+                    // console.log(doc.id);
+                    // console.log(doc.data());
+                    str += '<div id="' + doc.id + '">';
+                    str += '<img class="photo" src="' + doc.data().img_url + '"></img>' + doc.data().product_name;
+                    // str += '<p>' + doc.data().product_name + '</p>';
+                    str += '<p>' + doc.data().category + '</p>';
+                    str += '<p>' + doc.data().time + '</p>';
+                    str += '<p>' + doc.data().change + '</p>';
+                    str += '</div>';
+                    str += '<hr>';
+                });
+                $('#output').html(str);
+
+            });
+        });
+
+
+        // 投稿ページに遷移
+        $('#postpage').on('click', function () {
+            location.href = '/post.html';
+        });
+
+        // マイページに遷移
+        $('#mypage').on('click', function () {
+            location.href = '/toppage.html';
+        });
+
+
+    </script>
 
 </body>
 
 </html>
-
-<script>
-    //  < !--  データをリアルタイムに取得する処理 'time'新しい順 desc:降順 -->
-    db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
-        let str = '';
-        querySnapshot.forEach(function (doc) {
-            str += '<div id="' + doc.id + '">';
-            str += '<p>' + doc.data().product_name + '</p>';
-            str += '</div>';
-        });
-        $('#output').html(str);
-
-    });
-
-    // $('#output').css('border-radius', '50%');
-
-    // db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
-    //     let str = '';
-    //     querySnapshot.forEach(function (doc) {
-    //         // console.log(doc.id);
-    //         // console.log(doc.data());
-    //         str += '<div id="' + doc.id + '">';
-    //         str += '<img src="' + doc.data().img_url + '"></img>';
-    //         str += '<p>' + doc.data().product_name + '</p>';
-    //         str += '<p>' + doc.data().category + '</p>';
-    //         str += '<p>' + doc.data().time + '</p>';
-    //         str += '<p>' + doc.data().change + '</p>';
-    //         str += '</div>';
-    //     });
-    //     $('#output').html(str);
-
-    // });
-
-
-</script>
