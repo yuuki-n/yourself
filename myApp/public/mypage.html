@@ -68,35 +68,35 @@
 
 <script>
     //  < !--  データをリアルタイムに取得する処理 'time'新しい順 desc:降順 -->
-    // db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
-    //     let str = '';
-    //     querySnapshot.forEach(function (doc) {
-    //         str += '<div id="' + doc.id + '">';
-    //         str += '<p>' + doc.data().product_name + '</p>';
-    //         str += '</div>';
-    //     });
-    //     $('#output').html(str);
-
-    // });
-
-    // $('#output').css('border-radius', '50%');
-
     db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
         let str = '';
         querySnapshot.forEach(function (doc) {
-            // console.log(doc.id);
-            // console.log(doc.data());
             str += '<div id="' + doc.id + '">';
-            str += '<img src="' + doc.data().img_url + '"></img>';
             str += '<p>' + doc.data().product_name + '</p>';
-            str += '<p>' + doc.data().category + '</p>';
-            str += '<p>' + doc.data().time + '</p>';
-            str += '<p>' + doc.data().change + '</p>';
             str += '</div>';
         });
         $('#output').html(str);
 
     });
+
+    // $('#output').css('border-radius', '50%');
+
+    // db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
+    //     let str = '';
+    //     querySnapshot.forEach(function (doc) {
+    //         // console.log(doc.id);
+    //         // console.log(doc.data());
+    //         str += '<div id="' + doc.id + '">';
+    //         str += '<img src="' + doc.data().img_url + '"></img>';
+    //         str += '<p>' + doc.data().product_name + '</p>';
+    //         str += '<p>' + doc.data().category + '</p>';
+    //         str += '<p>' + doc.data().time + '</p>';
+    //         str += '<p>' + doc.data().change + '</p>';
+    //         str += '</div>';
+    //     });
+    //     $('#output').html(str);
+
+    // });
 
 
 </script>

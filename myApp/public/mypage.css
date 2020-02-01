@@ -1,9 +1,13 @@
 .content{
     font-family:'TsukuARdGothic-Regular',sans-serif;
     width:100%;
+    font-size: 14px;
+    color:#423738;
     /* max-width:375px; */
     /* max-height:667px; */
+    background-color: #FFFEFA;
 }
+
 .thumbnail{
     width: "150px";
     height: "150px";
