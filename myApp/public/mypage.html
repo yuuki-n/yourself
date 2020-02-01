@@ -48,21 +48,19 @@
         </header>
 
         <main>
-            <div id="thumbnail" class="thumbnail">
-                <div>
-                    <div id="output" class="output"></div>
+            <div id="output" class="output"></div>
         </main>
 
         <footer>
             <hr>
+            <!-- ホームページ -->
+            <button type="button" id="homepage">
+                <i class="fas fa-user-circle"></i>
+            </button>
+
             <!-- 投稿 -->
             <button type="button" id="postpage">
                 <i class="fas fa-plus-square"></i>
-            </button>
-
-            <!-- マイページ -->
-            <button type="button" id="mypage">
-                <i class="fas fa-user-circle"></i>
             </button>
         </footer>
 
@@ -94,14 +92,14 @@
         });
 
 
+        // ホームページに遷移
+        $('#homepage').on('click', function () {
+            location.href = '/home.html';
+        });
+
         // 投稿ページに遷移
         $('#postpage').on('click', function () {
             location.href = '/post.html';
-        });
-
-        // マイページに遷移
-        $('#mypage').on('click', function () {
-            location.href = '/toppage.html';
         });
 
 

@@ -122,7 +122,7 @@
                         </div>
                         </form> -->
 
-
+                        <!-- 投稿ボタン -->
                         <div>
                             <span class="fa-stack" id="post">
                                 <i class="far fa-circle fa-stack-2x circle"></i>
@@ -154,8 +154,8 @@
 
             <footer>
                 <hr>
-                <!-- 投稿 -->
-                <button type="button" id="postpage">
+                <!-- ホーム -->
+                <button type="button" id="homepage">
                     <i class="fas fa-plus-square"></i>
                 </button>
 
@@ -173,13 +173,13 @@
 <script>
 
     // TOPに戻る
-    $("#topback").click(function () {
-        // if (confirm('ページ遷移しますか？')) 
-        {
-            location.href = '/toppage.html';
-            // window.location.href = 'https://yourself-899de.firebaseapp.com/';
-        }
-    });
+    // $("#topback").click(function () {
+    //     // if (confirm('ページ遷移しますか？')) 
+    //     {
+    //         location.href = '/toppage.html';
+    //         // window.location.href = 'https://yourself-899de.firebaseapp.com/';
+    //     }
+    // });
 
     // 画像をプレビューする
     // $('#image_url').on('change', function (e) {
@@ -480,9 +480,9 @@
     });
 
 
-    // 投稿ページに遷移
-    $('#postpage').on('click', function () {
-        location.href = '/toppage.html';
+    // ホームページに遷移
+    $('#homepage').on('click', function () {
+        location.href = '/home.html';
     });
 
     // マイページに遷移

@@ -23,10 +23,20 @@
 
 
 <body>
-  <div class="content">
-    <header>
+  <header class="header_area">
 
-    </header>
+    <!-- <a class="menu-trigger" href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a> -->
+
+    <i class="fas fa-bars bar"></i>
+
+
+  </header>
+
+  <div class="content">
 
     <main>
       <!-- <div id="firebaseui-auth-container"></div> -->
@@ -123,7 +133,7 @@
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function (result) {
           console.log(result);
-          location.href = '/toppage.html'
+          location.href = '/home.html'
           document.getElementById('log').innerText = 'サインアップ成功';
         }).catch(function (error) {
           console.log('signup error')
@@ -161,7 +171,7 @@
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function (result) {
-          location.href = '/toppage.html'
+          location.href = '/home.html'
           document.getElementById('log').innerText = 'サインイン成功';
         }).catch(function (error) {
           var errorCode = error.code;
@@ -175,7 +185,7 @@
     // Googleアカウント認証
     var uiConfig = {
       // ログイン完了時のリダイレクト先
-      signInSuccessUrl: '/toppage.html',
+      signInSuccessUrl: '/home.html',
 
       credentialHelper: firebaseui.auth.CredentialHelper.NONE,
 
