@@ -108,6 +108,7 @@
             if (user != null) {
                 console.log(user);
                 console.log(user.uid);
+                User = firebase.auth().currentUser.uid
             }
             // 未ログイン状態で訪れた場合
             else {
@@ -122,19 +123,21 @@
             db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
                 let str = '';
                 querySnapshot.forEach(function (doc) {
-                    // console.log(doc.id);
-                    // console.log(doc.data());
-                    str += '<div id="' + doc.id + '">';
-                    str += '<img class="photo" src="' + doc.data().img_url + '"></img>' + doc.data().product_name;
-                    // str += '<p>' + doc.data().product_name + '</p>';
-                    str += '<p>' + doc.data().category + '</p>';
-                    str += '<p>' + doc.data().time + '</p>';
-                    str += '<p>' + doc.data().change + '</p>';
-                    str += '</div>';
-                    str += '<hr>';
+                    // 現在ログインしているユーザーの投稿だけ表示する
+                    if (User == doc.data().user_uid) {
+                        // console.log(doc.id);
+                        // console.log(doc.data());
+                        str += '<div id="' + doc.id + '">';
+                        str += '<img class="photo" src="' + doc.data().img_url + '"></img>' + doc.data().product_name;
+                        // str += '<p>' + doc.data().product_name + '</p>';
+                        str += '<p>' + doc.data().category + '</p>';
+                        str += '<p>' + doc.data().time + '</p>';
+                        str += '<p>' + doc.data().change + '</p>';
+                        str += '</div>';
+                        str += '<hr>';
+                    }
                 });
                 $('#output').html(str);
-
             });
         });
 
