@@ -16,24 +16,6 @@
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <script src="./config.js"></script>
-    <script>
-
-        // cloudfirestoreの場所を定義する処理
-        var db = firebase.firestore().collection('post')
-        // var db = firebase.firestore();
-        // var LIST = [];  //ID保管用
-
-        // // サインインしていなかったら、indexに飛ばす
-        // var user = firebase.auth().currentUser;
-
-        // if (user) {
-        //     // User is signed in.
-        // } else {
-        //     // No user is signed in.
-        //     location.href = '/index.html';
-        // }
-
-    </script>
 
 </head>
 
@@ -117,13 +99,31 @@
 
 
     <script>
+
+        // cloudfirestoreの場所を定義する処理
+        var db = firebase.firestore().collection('post')
+        // var db = firebase.firestore();
+
+        // ログインユーザーを取得する
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                console.log(user);
+                console.log(user.uid);
+            }
+            // 未ログイン状態で訪れた場合
+            else {
+                location.href = '/index.html';
+            }
+        });
+
+
         // 投稿内容を全て表示
         $(function () {
             db.orderBy('created_at', 'desc').onSnapshot(function (querySnapshot) {
                 let str = '';
                 querySnapshot.forEach(function (doc) {
-                    console.log(doc.id);
-                    console.log(doc.data());
+                    // console.log(doc.id);
+                    // console.log(doc.data());
                     str += '<div id="' + doc.id + '">';
                     str += '<img class="photo" src="' + doc.data().img_url + '"></img>' + doc.data().product_name;
                     str += '<p>' + doc.data().category + '</p>';
