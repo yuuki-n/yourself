@@ -1,4 +1,7 @@
-/* ヘッダー */
+/* -------*/
+/* ヘッダー*/
+/* -------*/
+
 .header_area{
     /* display: flex;
     justify-content:flex-end； */
@@ -55,6 +58,10 @@
     margin:10px;
 }
 
+
+/* --------------*/
+/* サインイン部分*/
+/* --------------*/
 
 .content{
     font-family:'TsukuARdGothic-Regular',sans-serif;

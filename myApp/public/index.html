@@ -23,6 +23,7 @@
 
 
 <body>
+
   <header class="header_area">
 
     <!-- <a class="menu-trigger" href="#">
@@ -36,9 +37,9 @@
 
   </header>
 
-  <div class="content">
+  <div>
 
-    <main>
+    <main class="content">
       <!-- <div id="firebaseui-auth-container"></div> -->
 
 
@@ -84,36 +85,33 @@
         </svg>
         <div>
 
-          <form class="form-group">
 
-            <div class="signin">
-              <p>メールアドレス</p>
-              <input type="email" class="email" id="mailaddress" required>
+          <div class="signin">
+            <p>メールアドレス</p>
+            <input type="email" class="email" id="mailaddress" required>
 
-              <p>パスワード ※8文字以上</p>
-              <input type="password" class="password" id="password" minlength="8" required>
-            </div>
+            <p>パスワード ※8文字以上</p>
+            <input type="password" class="password" id="password" minlength="8" required>
+          </div>
 
-            <!-- <div class="button">
+          <!-- <div class="button">
               <button class="login" id="login"　>ログイン</button>
               <button class="register" id="register">新規登録</button> -->
 
-            <div class="button">
-              <input type="button" class="register" value="新規登録" onclick="signUp()" />
-              <input type="button" class="login" value="ログイン" onclick="signIn()" />
-              <input type="button" class="register" value="ログアウト" onclick="signOut()" />
-              <p id="log"></p>
-              <p id="state"></p>
-            </div>
+          <div class="button">
+            <input type="button" class="register" value="新規登録" onclick="signUp()" />
+            <input type="button" class="login" value="ログイン" onclick="signIn()" />
+            <input type="button" class="register" value="ログアウト" onclick="signOut()" />
+            <p id="log"></p>
+            <p id="state"></p>
+          </div>
 
-            <!-- このファイルに認証用の処理を実装します。
+          <!-- このファイルに認証用の処理を実装します。
             <script src="firebase-auth.js"></script> -->
 
-            <div id="firebaseui-auth-container"></div>
+          <div id="firebaseui-auth-container"></div>
 
-        </div>
-
-        </form>
+          <!-- </div> -->
 
     </main>
 

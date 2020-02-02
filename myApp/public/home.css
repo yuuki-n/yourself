@@ -1,18 +1,28 @@
-/* ヘッダー */
+.wrapper{
+    font-family:'TsukuARdGothic-Regular',sans-serif;
+    color:#423738;
+    background-color: #FFFEFA;
+}
+
+/* -------*/
+/* ヘッダー*/
+/* -------*/
+
 .header_area {
   position: fixed; /* 固定 */
   top: 0; /* 一番上に表示 */
   width: 100%; /* 中央に表示 */
 }
 
+/* --------------*/
+/* メインコンテンツ*/
+/* --------------*/
+
 .content{
-    font-family:'TsukuARdGothic-Regular',sans-serif;
     font-size: 14px;
-    color:#423738;
     width:100%;
     /* max-width:375px; */
     /* max-height:667px; */
-    background-color: #FFFEFA;
     min-height: 100vh;
 }
 
@@ -31,21 +41,21 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-     border: 4px solid#D39094;
+     border: 3px solid#F3C2C4;
 
 }
 .button1{
-    font-family:'TsukuARdGothic-Regular',sans-serif;
     font-size: 16px;
-    color:#423738;
-    background-color: #FFFEFA;
     border-radius: 5px;
     border-color: #423738;
     /* padding:10px; */
     margin-right: 10px;
 }
 
-/* フッター */
+/* -------*/
+/* フッター*/
+/* -------*/
+
 .footer_area{
   position: fixed; /* 固定 */
   bottom: 0; /* 一番下に表示 */
@@ -55,8 +65,5 @@
 
 /* ホームボタン */
 .fa-home{
-    color:#423738;
-    border:none;
-   font-size: 3em 
+    color:#F3C2C4;
 }
-
