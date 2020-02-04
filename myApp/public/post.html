@@ -74,11 +74,6 @@
 
             <div>
 
-                <!-- <div class="menu"> -->
-                <!-- <i class="fas fa-angle-left fa-2x" id="topback"></i> -->
-                <!-- <a href="#" id="send" class="word_btn">投稿</a> -->
-                <!-- </div> -->
-
                 <main>
 
                     <div id="img_url" class="preview"></div>
@@ -87,8 +82,8 @@
                     <form>
                         <label for="image_url">
                             <i class="fas fa-camera fa-2x"></i>
-                            <input type="file" name="upfile" id="image_url" style="display:none;" accept="image/*"
-                                capture>
+                            <input type="file" name="upfile" id="image_url" accept="image/*" hidden />
+                            <!-- <input type="file" name="upfile" id="image_url" style="display:none;" accept="image/*" capture> -->
                         </label>
                         <input type="text" id="product_name" class="caption" placeholder="キャプションを書く" required></input>
                     </form>
@@ -156,29 +151,11 @@
 
                             <!-- 投稿ボタン -->
                             <div>
-                                <span class="fa-stack" id="post">
+                                <span class="fa-stack" id="post" onClick="imageUpload();">
                                     <i class="far fa-circle fa-stack-2x circle"></i>
                                     <i class="far fa-paper-plane fa-stack-1x plane"></i>
                                 </span>
                             </div>
-                            <!-- <svg width="95" height="94" viewBox="0 0 95 94" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g filter="url(#filter0_d)">
-                            <circle cx="47.5" cy="41.5" r="33.5" fill="#4BDDA8" />
-                        </g>
-                        <defs>
-                            <filter id="filter0_d" x="0" y="0" width="95" height="95" filterUnits="userSpaceOnUse"
-                                color-interpolation-filters="sRGB">
-                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                <feColorMatrix in="SourceAlpha" type="matrix"
-                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                <feOffset dy="6" />
-                                <feGaussianBlur stdDeviation="7" />
-                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0" />
-                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
-                            </filter>
-                        </defs>
-                    </svg> -->
 
                 </main>
 
@@ -286,35 +263,6 @@
                         reader.readAsDataURL(file);
                     });
                 });
-
-
-
-
-
-                // $(function () {
-                //     $('.button1').on('click', function () {
-                //         var category = $(this).attr("value");
-                //     });
-                // });
-
-                // 家電を選んだ時に、美容とファッションを表示しない方を初期化
-                // $(function () {
-                //     $('#electorics').on('click', function () {
-                //         $("#beauty").text("");
-                //         $("#fashion").text("");
-                //     });
-                // });
-
-                // value 値を取得して表示
-                // $("#out2").text($("#rd2").val());
-                // var category = $('.button1').val();
-
-                // $(function () {
-                //     $('#beauty').on('click', function () {
-                //         $("#electorics").text("");
-                //         $("#fashion").text("");
-                //     });
-                // });
 
 
                 // 家電ボタンを押したとき
