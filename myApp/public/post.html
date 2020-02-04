@@ -65,9 +65,8 @@
 
             <!-- サインアウト -->
             <span>
-                <i id="signout" class="fas fa-sign-out-alt"></i>
+                <i id="signout" class="fas fa-sign-out-alt sign-out fa-lg"></i>
             </span>
-
 
         </header>
 
@@ -89,7 +88,7 @@
                         <label for="image_url">
                             <i class="fas fa-camera fa-2x"></i>
                             <input type="file" name="upfile" id="image_url" style="display:none;" accept="image/*"
-                                capture="camera" required>
+                                capture>
                         </label>
                         <input type="text" id="product_name" class="caption" placeholder="キャプションを書く" required></input>
                     </form>
@@ -161,8 +160,8 @@
                                     <i class="far fa-circle fa-stack-2x circle"></i>
                                     <i class="far fa-paper-plane fa-stack-1x plane"></i>
                                 </span>
-
-                                <!-- <svg width="95" height="94" viewBox="0 0 95 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            </div>
+                            <!-- <svg width="95" height="94" viewBox="0 0 95 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d)">
                             <circle cx="47.5" cy="41.5" r="33.5" fill="#4BDDA8" />
                         </g>
@@ -181,384 +180,383 @@
                         </defs>
                     </svg> -->
 
-                            </div>
                 </main>
 
             </div>
         </div>
 
-        <footer>
-            <!-- ホームページ -->
-            <span>
-                <i id="homepage" class="fas fa-home fa-home"></i>
-            </span>
+        <footer class="footer_area">
+            <hr>
+            <div class="footer_menu">
+                <!-- ホームページ -->
+                <span>
+                    <i id="homepage" class="fas fa-home fa-home fa-lg"></i>
+                </span>
 
-            <!-- 投稿 -->
-            <span>
-                <i id="postpage" class="fas fa-plus-square plus"></i>
-            </span>
+                <!-- 投稿 -->
+                <span>
+                    <i id="postpage" class="fas fa-plus-square plus fa-lg"></i>
+                </span>
 
-            <!-- マイページ -->
-            <span>
-                <i id="mypage" class="fas fa-user-circle"></i>
-            </span>
-        </footer>
+                <!-- マイページ -->
+                <span>
+                    <i id="mypage" class="fas fa-user-circle fa-lg"></i>
+                </span>
 
-    </div>
+            </div>
 
-
-    <script>
-
-
-        // cloudfirestoreの場所を定義する処理
-        var db = firebase.firestore().collection('post')
-
-        // ログインユーザーを取得する
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user != null) {
-                console.log(user);
-                console.log(user.uid);
-                User = firebase.auth().currentUser.uid
-            }
-            // 未ログイン状態で訪れた場合
-            else {
-                location.href = '/index.html';
-            }
-        });
+            <script>
 
 
+                // cloudfirestoreの場所を定義する処理
+                var db = firebase.firestore().collection('post')
 
-
-        // TOPに戻る
-        // $("#topback").click(function () {
-        //     // if (confirm('ページ遷移しますか？')) 
-        //     {
-        //         location.href = '/toppage.html';
-        //         // window.location.href = 'https://yourself-899de.firebaseapp.com/';
-        //     }
-        // });
-
-        // 画像をプレビューする
-        // $('#image_url').on('change', function (e) {
-        //     var reader = new FileReader();
-        //     reader.onload = function (e) {
-        //         $("#preview").attr('src', e.target.result);
-        //     }
-        //     reader.readAsDataURL(e.target.files[0]);
-        // });
-        let imageUrl = '';
-        // 選択した画像を表示する
-        $(function () {
-            //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
-            $('form').on('change', 'input[type="file"]', function (e) {
-                var file = e.target.files[0],
-                    reader = new FileReader(),
-                    $preview = $(".preview");
-                t = this;
-
-                // 画像ファイル以外の場合は何もしない
-                // if (file.type.indexOf("image") < 0) {
-                //     return false;
-                // }
+                // ログインユーザーを取得する
+                firebase.auth().onAuthStateChanged((user) => {
+                    if (user != null) {
+                        // console.log(user);
+                        // console.log(user.uid);
+                        User = firebase.auth().currentUser.uid
+                    }
+                    // 未ログイン状態で訪れた場合
+                    else {
+                        location.href = '/index.html';
+                    }
+                });
 
 
 
-                // ファイル読み込みが完了した際のイベント登録
-                reader.onload = (function (file) {
-                    return function (e) {
-                        //既存のプレビューを削除
-                        $preview.empty();
-                        // .prevewの領域の中にロードした画像を表示するimageタグを追加
-                        // console.log(e.target.result)
+
+                // TOPに戻る
+                // $("#topback").click(function () {
+                //     // if (confirm('ページ遷移しますか？')) 
+                //     {
+                //         location.href = '/toppage.html';
+                //         // window.location.href = 'https://yourself-899de.firebaseapp.com/';
+                //     }
+                // });
+
+                // 画像をプレビューする
+                // $('#image_url').on('change', function (e) {
+                //     var reader = new FileReader();
+                //     reader.onload = function (e) {
+                //         $("#preview").attr('src', e.target.result);
+                //     }
+                //     reader.readAsDataURL(e.target.files[0]);
+                // });
+                let imageUrl = '';
+                // 選択した画像を表示する
+                $(function () {
+                    //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
+                    $('form').on('change', 'input[type="file"]', function (e) {
+                        var file = e.target.files[0],
+                            reader = new FileReader(),
+                            $preview = $(".preview");
+                        t = this;
+
+                        // 画像ファイル以外の場合は何もしない
+                        // if (file.type.indexOf("image") < 0) {
+                        //     return false;
+                        // }
 
 
-                        imageUrl = e.target.result;
-                        $preview.append($('<img>').attr({
-                            src: e.target.result,
-                            // width: "15%",
-                            // height: "15%",
-                            width: "150px",
-                            height: "150px",
-                            class: "preview",
-                            title: file.name
-                        }));
+
+                        // ファイル読み込みが完了した際のイベント登録
+                        reader.onload = (function (file) {
+                            return function (e) {
+                                //既存のプレビューを削除
+                                $preview.empty();
+                                // .prevewの領域の中にロードした画像を表示するimageタグを追加
+                                // console.log(e.target.result)
+
+
+                                imageUrl = e.target.result;
+                                $preview.append($('<img>').attr({
+                                    src: e.target.result,
+                                    // width: "15%",
+                                    // height: "15%",
+                                    width: "150px",
+                                    height: "150px",
+                                    class: "preview",
+                                    title: file.name
+                                }));
+                            };
+                        })(file);
+
+                        reader.readAsDataURL(file);
+                    });
+                });
+
+
+
+
+
+                // $(function () {
+                //     $('.button1').on('click', function () {
+                //         var category = $(this).attr("value");
+                //     });
+                // });
+
+                // 家電を選んだ時に、美容とファッションを表示しない方を初期化
+                // $(function () {
+                //     $('#electorics').on('click', function () {
+                //         $("#beauty").text("");
+                //         $("#fashion").text("");
+                //     });
+                // });
+
+                // value 値を取得して表示
+                // $("#out2").text($("#rd2").val());
+                // var category = $('.button1').val();
+
+                // $(function () {
+                //     $('#beauty').on('click', function () {
+                //         $("#electorics").text("");
+                //         $("#fashion").text("");
+                //     });
+                // });
+
+
+                // 家電ボタンを押したとき
+                $(function () {
+                    $("#electronics").on("click", function () {
+                        // value 値を設定
+                        $('.button1').val('家電');
+                    });
+                });
+
+                // 美容ボタンを押したとき
+                $(function () {
+                    $("#beauty").on("click", function () {
+                        // value 値を設定
+                        $('.button1').val('美容');
+                    });
+                });
+
+                // ファッションボタンを押したとき
+                $(function () {
+                    $("#fashion").on("click", function () {
+                        // value 値を設定
+                        $('.button1').val('ファッション');
+                    });
+                });
+
+                // 朝ボタンを押したとき
+                $(function () {
+                    $("#morning").on("click", function () {
+                        // value 値を設定
+                        $('.button2').val('朝');
+                    });
+                });
+
+                // 昼ボタンを押したとき
+                $(function () {
+                    $("#daytime").on("click", function () {
+                        // value 値を設定
+                        $('.button2').val('昼');
+                    });
+                });
+
+                // 夜ボタンを押したとき
+                $(function () {
+                    $("#night").on("click", function () {
+                        // value 値を設定
+                        $('.button2').val('夜');
+                    });
+                });
+
+                // 時短になったボタンを押したとき
+                $(function () {
+                    $("#change1").on("click", function () {
+                        // value 値を設定
+                        $('.button3').val('時短になった');
+                    });
+                });
+
+                // 楽しくなったボタンを押したとき
+                $(function () {
+                    $("#change2").on("click", function () {
+                        // value 値を設定
+                        $('.button3').val('楽しくなった');
+                    });
+                });
+
+                // 規則正しくなったボタンを押したとき
+                $(function () {
+                    $("#change3").on("click", function () {
+                        // value 値を設定
+                        $('.button3').val('規則正しくなった');
+                    });
+                });
+
+                // 社交的になったボタンを押したとき
+                $(function () {
+                    $("#change3").on("click", function () {
+                        // value 値を設定
+                        $('.button3').val('社交的になった');
+                    });
+                });
+
+
+                // その他ボタンをテキスト入力可能にする
+                // $(function () {
+                //     $('change5').change(function () {
+                //         var radioval = $(this).val();
+                //         if (radioval == その他) {
+                //             $('#inputother').removeAttr('disabled');
+                //             $('.other_label').removeClass('disabled');
+                //         } else {
+                //             $('#inputother').attr('disabled', 'disabled');
+                //             $('.other_label').addClass('disabled');
+                //         }
+                //     });
+                // });
+
+
+
+                // カテゴリボタンの色を変更する
+                $(function () {
+                    $('.button1').on('click', function () {
+                        $('.button1').removeClass('active1');
+                        $(this).addClass('active1');
+                    });
+                });
+
+                // 時間ボタンの色を変更する
+                $(function () {
+                    $('.button2').on('click', function () {
+                        $('.button2').removeClass('active2');
+                        $(this).addClass('active2');
+                    });
+                });
+
+                // 変化ボタンの色を変更する
+                $(function () {
+                    $('.button3').on('click', function () {
+                        $('.button3').removeClass('active3');
+                        $(this).addClass('active3');
+                    });
+                });
+
+
+                // 全てのボタンが選択されたら、投稿ボタン・投稿アイコンが押せるようになる
+                // $('#checkbox').change(function () {
+
+
+                // $('#send').prop('disabled', false);
+
+
+
+
+
+                // $('#post').prop('disabled', false);
+
+
+                // 全てのボタンを押さないと、投稿ボタンがグレーアウト
+                // 無効状態からスタート
+                // $('.send').prop("disabled,true");
+
+                // $('form input:required').each(function () {
+                // $(this).prev("lebel").addclass("required");
+                // });
+
+                // // 押したら
+                // $('form input:required').change(function () {
+                // // 空のフラグ
+                // let flag = true;
+                // // 必須箇所のチェック
+
+
+
+
+                // 日時を取得する関数
+                function getNowDatetime() {
+                    const date = new Date();
+                    const year = date.getFullYear();
+                    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+                    const day = ('0' + date.getDate()).slice(-2);
+                    const hour = ('0' + date.getHours()).slice(-2);
+                    const min = ('0' + date.getMinutes()).slice(-2);
+                    const sec = ('0' + date.getSeconds()).slice(-2);
+                    return `${year}-${month}-${day}T${hour}:${min}:${sec}`
+                }
+
+
+                // var user = firebase.auth().currentUser;
+
+
+                // 投稿ボタンクリックで投稿
+                // $('#send').on('click', function () {
+                //     const data = {
+                //         // img_url: $('#img_url').val(),
+                //         img_url: imageUrl,
+                //         product_name: $('#product_name').val(),
+                //         created_at: getNowDatetime(),
+                //         category: $('.button1').val(),
+                //         time: $('.button2').val(),
+                //         change: $('.button3').val(),
+                //         uid: user,
+                //     };
+
+
+                //     // console.log(data);
+
+                //     db.add(data);
+                //     $('#img_url').val('');
+                //     $('#product_name').val('');
+                //     $('#category').val('');
+                //     $('#time').val('');
+                //     $('#change').val('');
+                // });
+
+                // 投稿アイコンクリックで投稿
+                $('#post').on('click', function () {
+                    const data = {
+                        // img_url: $('#img_url').val(),
+                        img_url: imageUrl,
+                        product_name: $('#product_name').val(),
+                        created_at: getNowDatetime(),
+                        category: $('.button1').val(),
+                        time: $('.button2').val(),
+                        change: $('.button3').val(),
+                        user_uid: User,
                     };
-                })(file);
-
-                reader.readAsDataURL(file);
-            });
-        });
 
 
+                    // console.log(data);
+
+                    db.add(data);
+                    $('#img_url').val('');
+                    $('#product_name').val('');
+                    $('#category').val('');
+                    $('#time').val('');
+                    $('#change').val('');
+                });
+
+                // サインアウト
+                $('#signout').on('click', function () {
+                    // firebase.auth().onAuthStateChanged((user) => {
+                    firebase.auth().signOut().then(() => {
+                        console.log("ログアウトしました");
+                        location.href = '/index.html';
+                    });
+                });
 
 
-
-        // $(function () {
-        //     $('.button1').on('click', function () {
-        //         var category = $(this).attr("value");
-        //     });
-        // });
-
-        // 家電を選んだ時に、美容とファッションを表示しない方を初期化
-        // $(function () {
-        //     $('#electorics').on('click', function () {
-        //         $("#beauty").text("");
-        //         $("#fashion").text("");
-        //     });
-        // });
-
-        // value 値を取得して表示
-        // $("#out2").text($("#rd2").val());
-        // var category = $('.button1').val();
-
-        // $(function () {
-        //     $('#beauty').on('click', function () {
-        //         $("#electorics").text("");
-        //         $("#fashion").text("");
-        //     });
-        // });
+                // ホームページに遷移
+                $('#homepage').on('click', function () {
+                    location.href = '/home.html';
+                });
 
 
-        // 家電ボタンを押したとき
-        $(function () {
-            $("#electronics").on("click", function () {
-                // value 値を設定
-                $('.button1').val('家電');
-            });
-        });
-
-        // 美容ボタンを押したとき
-        $(function () {
-            $("#beauty").on("click", function () {
-                // value 値を設定
-                $('.button1').val('美容');
-            });
-        });
-
-        // ファッションボタンを押したとき
-        $(function () {
-            $("#fashion").on("click", function () {
-                // value 値を設定
-                $('.button1').val('ファッション');
-            });
-        });
-
-        // 朝ボタンを押したとき
-        $(function () {
-            $("#morning").on("click", function () {
-                // value 値を設定
-                $('.button2').val('朝');
-            });
-        });
-
-        // 昼ボタンを押したとき
-        $(function () {
-            $("#daytime").on("click", function () {
-                // value 値を設定
-                $('.button2').val('昼');
-            });
-        });
-
-        // 夜ボタンを押したとき
-        $(function () {
-            $("#night").on("click", function () {
-                // value 値を設定
-                $('.button2').val('夜');
-            });
-        });
-
-        // 時短になったボタンを押したとき
-        $(function () {
-            $("#change1").on("click", function () {
-                // value 値を設定
-                $('.button3').val('時短になった');
-            });
-        });
-
-        // 楽しくなったボタンを押したとき
-        $(function () {
-            $("#change2").on("click", function () {
-                // value 値を設定
-                $('.button3').val('楽しくなった');
-            });
-        });
-
-        // 規則正しくなったボタンを押したとき
-        $(function () {
-            $("#change3").on("click", function () {
-                // value 値を設定
-                $('.button3').val('規則正しくなった');
-            });
-        });
-
-        // 社交的になったボタンを押したとき
-        $(function () {
-            $("#change3").on("click", function () {
-                // value 値を設定
-                $('.button3').val('社交的になった');
-            });
-        });
-
-
-        // その他ボタンをテキスト入力可能にする
-        // $(function () {
-        //     $('change5').change(function () {
-        //         var radioval = $(this).val();
-        //         if (radioval == その他) {
-        //             $('#inputother').removeAttr('disabled');
-        //             $('.other_label').removeClass('disabled');
-        //         } else {
-        //             $('#inputother').attr('disabled', 'disabled');
-        //             $('.other_label').addClass('disabled');
-        //         }
-        //     });
-        // });
+                // マイページに遷移
+                $('#mypage').on('click', function () {
+                    location.href = '/mypage.html';
+                });
 
 
 
-        // カテゴリボタンの色を変更する
-        $(function () {
-            $('.button1').on('click', function () {
-                $('.button1').removeClass('active1');
-                $(this).addClass('active1');
-            });
-        });
-
-        // 時間ボタンの色を変更する
-        $(function () {
-            $('.button2').on('click', function () {
-                $('.button2').removeClass('active2');
-                $(this).addClass('active2');
-            });
-        });
-
-        // 変化ボタンの色を変更する
-        $(function () {
-            $('.button3').on('click', function () {
-                $('.button3').removeClass('active3');
-                $(this).addClass('active3');
-            });
-        });
-
-
-        // 全てのボタンが選択されたら、投稿ボタン・投稿アイコンが押せるようになる
-        // $('#checkbox').change(function () {
-
-
-        // $('#send').prop('disabled', false);
-
-
-
-
-
-        // $('#post').prop('disabled', false);
-
-
-        // 全てのボタンを押さないと、投稿ボタンがグレーアウト
-        // 無効状態からスタート
-        // $('.send').prop("disabled,true");
-
-        // $('form input:required').each(function () {
-        // $(this).prev("lebel").addclass("required");
-        // });
-
-        // // 押したら
-        // $('form input:required').change(function () {
-        // // 空のフラグ
-        // let flag = true;
-        // // 必須箇所のチェック
-
-
-
-
-        // 日時を取得する関数
-        function getNowDatetime() {
-            const date = new Date();
-            const year = date.getFullYear();
-            const month = ('0' + (date.getMonth() + 1)).slice(-2);
-            const day = ('0' + date.getDate()).slice(-2);
-            const hour = ('0' + date.getHours()).slice(-2);
-            const min = ('0' + date.getMinutes()).slice(-2);
-            const sec = ('0' + date.getSeconds()).slice(-2);
-            return `${year}-${month}-${day}T${hour}:${min}:${sec}`
-        }
-
-
-        // var user = firebase.auth().currentUser;
-
-
-        // 投稿ボタンクリックで投稿
-        // $('#send').on('click', function () {
-        //     const data = {
-        //         // img_url: $('#img_url').val(),
-        //         img_url: imageUrl,
-        //         product_name: $('#product_name').val(),
-        //         created_at: getNowDatetime(),
-        //         category: $('.button1').val(),
-        //         time: $('.button2').val(),
-        //         change: $('.button3').val(),
-        //         uid: user,
-        //     };
-
-
-        //     // console.log(data);
-
-        //     db.add(data);
-        //     $('#img_url').val('');
-        //     $('#product_name').val('');
-        //     $('#category').val('');
-        //     $('#time').val('');
-        //     $('#change').val('');
-        // });
-
-        // 投稿アイコンクリックで投稿
-        $('#post').on('click', function () {
-            const data = {
-                // img_url: $('#img_url').val(),
-                img_url: imageUrl,
-                product_name: $('#product_name').val(),
-                created_at: getNowDatetime(),
-                category: $('.button1').val(),
-                time: $('.button2').val(),
-                change: $('.button3').val(),
-                user_uid: User,
-            };
-
-
-            // console.log(data);
-
-            db.add(data);
-            $('#img_url').val('');
-            $('#product_name').val('');
-            $('#category').val('');
-            $('#time').val('');
-            $('#change').val('');
-        });
-
-        // サインアウト
-        $('#signout').on('click', function () {
-            // firebase.auth().onAuthStateChanged((user) => {
-            firebase.auth().signOut().then(() => {
-                console.log("ログアウトしました");
-                location.href = '/index.html';
-            });
-        });
-
-
-        // ホームページに遷移
-        $('#homepage').on('click', function () {
-            location.href = '/home.html';
-        });
-
-
-        // マイページに遷移
-        $('#mypage').on('click', function () {
-            location.href = '/mypage.html';
-        });
-
-
-
-    </script>
+            </script>
 
 
 </body>

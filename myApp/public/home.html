@@ -66,7 +66,7 @@
 
             <!-- サインアウト -->
             <span>
-                <i id="signout" class="fas fa-sign-out-alt"></i>
+                <i id="signout" class="fas fa-sign-out-alt sign-out fa-lg"></i>
             </span>
 
         </header>
@@ -80,20 +80,23 @@
         </div>
 
         <footer class="footer_area">
-            <!-- ホームページ -->
-            <span>
-                <i id="homepage" class="fas fa-home fa-home"></i>
-            </span>
+            <hr>
+            <div class="footer_menu">
+                <!-- ホームページ -->
+                <span>
+                    <i id="homepage" class="fas fa-home fa-home fa-lg"></i>
+                </span>
 
-            <!-- 投稿 -->
-            <span>
-                <i id="postpage" class="fas fa-plus-square"></i>
-            </span>
+                <!-- 投稿 -->
+                <span>
+                    <i id="postpage" class="fas fa-plus-square fa-lg"></i>
+                </span>
 
-            <!-- マイページ -->
-            <span>
-                <i id="mypage" class="fas fa-user-circle"></i>
-            </span>
+                <!-- マイページ -->
+                <span>
+                    <i id="mypage" class="fas fa-user-circle fa-lg"></i>
+                </span>
+            </div>
         </footer>
 
     </div>
@@ -108,8 +111,8 @@
         // ログインユーザーを取得する
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
-                console.log(user);
-                console.log(user.uid);
+                // console.log(user);
+                // console.log(user.uid);
             }
             // 未ログイン状態で訪れた場合
             else {
@@ -135,7 +138,7 @@
                     // str += '<button class="button1" value=' + doc.data().time + '"></button>';
                     // str += '<button class="button1" value=' + doc.data().change + '"></button>';
                     str += '</div>';
-                    str += '<hr>';
+                    // str += '<hr>';
                 });
                 $('#output').html(str);
             });

@@ -9,9 +9,16 @@
 /* -------*/
 
 .header_area {
-  position: fixed; /* 固定 */
+  /* position: fixed; */
   top: 0; /* 一番上に表示 */
   width: 100%; /* 中央に表示 */
+  display: flex;
+  justify-content: space-between;
+  z-index:999;
+}
+.sign-out{
+    padding-top: 10px;
+    padding-right:30px;
 }
 
 /* --------------*/
@@ -24,6 +31,7 @@
     /* max-width:375px; */
     /* max-height:667px; */
     min-height: 100vh;
+    padding-bottom:40px; /*フッターの高さと同じ*/
 }
 
 .logo{
@@ -60,7 +68,14 @@
   position: fixed; /* 固定 */
   bottom: 0; /* 一番下に表示 */
   width: 100%; /* 中央に表示 */
-  height:64px;
+  height:40px;
+  margin-top: 40px;
+}
+
+.footer_menu{
+    padding: 0px 40px;
+    display: flex;
+    justify-content:space-around; 
 }
 
 /* ホームボタン */

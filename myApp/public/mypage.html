@@ -70,34 +70,37 @@
 
             <!-- サインアウト -->
             <span>
-                <i id="signout" class="fas fa-sign-out-alt"></i>
+                <i id="signout" class="fas fa-sign-out-alt sign-out fa-lg"></i>
             </span>
 
         </header>
 
-        <div class="content">
+        <!-- <div class="content"> -->
 
-            <main>
-                <div id="output" class="output"></div>
-            </main>
+        <main class="content">
+            <div id="output" class="output"></div>
+        </main>
 
-        </div>
+        <!-- </div> -->
 
         <footer class="footer_area">
-            <!-- ホームページ -->
-            <span>
-                <i id="homepage" class="fas fa-home fa-home"></i>
-            </span>
+            <hr>
+            <div class="footer_menu">
+                <!-- ホームページ -->
+                <span>
+                    <i id="homepage" class="fas fa-home fa-home fa-lg"></i>
+                </span>
 
-            <!-- 投稿 -->
-            <span>
-                <i id="postpage" class="fas fa-plus-square"></i>
-            </span>
+                <!-- 投稿 -->
+                <span>
+                    <i id="postpage" class="fas fa-plus-square fa-lg"></i>
+                </span>
 
-            <!-- マイページ -->
-            <span>
-                <i id="mypage" class="fas fa-user-circle  circle"></i>
-            </span>
+                <!-- マイページ -->
+                <span>
+                    <i id="mypage" class="fas fa-user-circle  circle fa-lg"></i>
+                </span>
+            </div>
         </footer>
 
     </div>
@@ -110,8 +113,8 @@
         // ログインユーザーを取得する
         firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
-                console.log(user);
-                console.log(user.uid);
+                // console.log(user);
+                // console.log(user.uid);
                 User = firebase.auth().currentUser.uid
             }
             // 未ログイン状態で訪れた場合
@@ -138,7 +141,7 @@
                         str += '<p>' + doc.data().time + '</p>';
                         str += '<p>' + doc.data().change + '</p>';
                         str += '</div>';
-                        str += '<hr>';
+                        // str += '<hr>';
                     }
                 });
 

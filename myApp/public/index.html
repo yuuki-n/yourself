@@ -10,11 +10,13 @@
   <link rel="stylesheet" href="index.css">
 
 
+
   <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
   <script src="./config.js"></script>
 </head>
 
@@ -32,7 +34,8 @@
       <span></span>
     </a> -->
 
-    <i class="fas fa-bars bar"></i>
+    <!-- ハンバーガーメニュー -->
+    <!-- <i class="fas fa-bars bar"></i> -->
 
 
   </header>
@@ -129,38 +132,34 @@
       var password = document.getElementById('password').value;
 
       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(function (result) {
-          console.log(result);
-          location.href = '/home.html'
-          document.getElementById('log').innerText = 'サインアップ成功';
-        }).catch(function (error) {
-          console.log('signup error')
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          document.getElementById('log').innerText = 'サインアップ失敗: ' + errorCode + ', ' + errorMessage;
-        });
+      // .then(function (result) {
+      //   console.log(result);
     }
+    // 存在確認済のメールアドレスかどうか(true or false)
+    // var verified = firebase.auth().currentUser.emailVerified;
+    // console.log(verified);
 
+    // // 未確認のメールアドレスの場合、メールを送信する
+    // if (!verified) {
+    //   // メール送信処理
+    //   firebase.auth().currentUser.sendEmailVerification();
+    //   var email = firebase.auth().currentUser.email;
+    //   alert('確認メールを送信しました。', email);
+    // }
 
-    // メールアドレス認証    ログイン
-    // $(function () {
-    // $('#login').on('click', function () {
-    //   var email = $('#mailaddress').val();
-    //   var pass = $('#password').val();
-    //   console.log(email);
-    //   firebase.auth().signInWithEmailAndPassword(email, pass)
-    //     .then(user => {
-    //       // ログイン成功
-    //       var user = firebase.auth().currentUser;
-    //       // ページを移動する、ユーザーの情報を取得して処理を行う、等する
-    //       location.href = '/toppage.html';
-    //       // user.uid をユーザーIDとして使用する
-    //     }, err => {
-    //       // エラーを表示する等
-    //       alert('ログインできません')
+    //       else {
+    //         location.href = '/home.html'
+    //       }
+    //       document.getElementById('log').innerText = 'サインアップ成功';
+    //     }).catch(function (error) {
+    //       console.log('signup error')
+    //       var errorCode = error.code;
+    //       var errorMessage = error.message;
+    //       document.getElementById('log').innerText = 'サインアップ失敗: ' + errorCode + ', ' + errorMessage;
     //     });
-    // });
-    // });
+    // }
+
+
 
     // ログイン
     function signIn() {
@@ -190,7 +189,7 @@
       // 利用する認証機能
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID  //メール認証
+        // firebase.auth.EmailAuthProvider.PROVIDER_ID  //メール認証
       ],
 
 
@@ -268,7 +267,7 @@
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // ログイン認証済
-        console.log('auth user', user);
+        // console.log('auth user', user);
         document.getElementById('state').innerText = 'ログイン済(email: ' + user.email + ')';
       } else {
         // No user is signed in.

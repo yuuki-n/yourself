@@ -7,7 +7,14 @@
 /* -------*/
 /* ヘッダー*/
 /* -------*/
-
+.header_area{
+    display: flex;
+    justify-content: space-between;
+}
+.sign-out{
+    padding-top: 10px;
+    padding-right:30px;
+}
 
 /* --------------*/
 /* メインコンテンツ*/
@@ -19,6 +26,8 @@
     width:100%;
     display: flex;
     justify-content: center;
+    margin-bottom:80px;
+    padding-bottom:40px; /*フッターの高さと同じ*/
 }
 
 
@@ -43,8 +52,11 @@
 .caption{
     font-size: 14px;
     opacity: 0.5;
-    border:none;
-    background:none;
+    /* border:none; */
+    /* background:none; */
+    /* text-decoration:underline; */
+    /* text-decoration-color:#423738; */
+    border-color: #423738;
 
     width: 345px;
     height: 30px;
@@ -135,12 +147,22 @@ display: flex;
     font-size: 2em;
     position:fixed;
     right:50px;
-    bottom:50px;
+    bottom:150px;
 }
 
 /* -------*/
 /* フッター*/
 /* -------*/
+.footer_area{
+    height:40px;
+    bottom: 0;
+}
+
+.footer_menu{
+    padding: 0px 40px;
+    display: flex;
+    justify-content:space-around; 
+}
 .plus{
     color:#F3C2C4;
 }

@@ -10,9 +10,13 @@
 
 .header_area{
     font-size: 14px;
-
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+ }
+
+.sign-out{
+    padding-top: 10px;
+    padding-right:30px;
 }
 
 /* --------------*/
@@ -24,6 +28,7 @@
     font-size: 14px;
     /* max-width:375px; */
     /* max-height:667px; */
+    padding-bottom:40px; /*フッターの高さと同じ*/
 }
 
 .photo{
@@ -37,7 +42,15 @@
 /* -------*/
 /* フッター*/
 /* -------*/
-
+.footer_area{
+    height:40px;
+    bottom: 0;
+}
+.footer_menu{
+    padding: 0px 40px;
+    display: flex;
+    justify-content:space-around; 
+}
 .circle{
     color:#F3C2C4;
 }
