@@ -76,18 +76,20 @@
 
                 <main>
 
-                    <canvas id="canvas"></canvas>
+                    <!-- fakepathのエラーが出る -->
+                    <!-- <canvas id="canvas"></canvas> -->
 
-
-                    <!-- <div id="img_url" class="preview"></div> -->
+                    <div id="img_url" class="preview"></div>
 
                     <form>
                         <label for="image_url">
                             <i class="fas fa-camera fa-2x"></i>
-                            <div><input type="file" name="select" id="select" /></div>
-                            <!-- <input type="file" name="upfile" id="image_url" accept="image/*" hidden /> -->
+                            <!-- fakepathのエラーが出る -->
+                            <!-- <div><input type="file" name="select" id="select" /></div> -->
+                            <input type="file" name="upfile" id="image_url" accept="image/*" hidden />
                         </label>
                         <input type="text" id="product_name" class="caption" placeholder="キャプションを書く" required></input>
+                        <p>※画像は1MB以下でお願いします</p>
                     </form>
 
                     <div>
@@ -219,132 +221,135 @@
 
 
                 // // 画像をプレビューする
-                // let imageUrl = '';
-                // // 選択した画像を表示する
-                // $(function () {
-                //     //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
-                //     $('form').on('change', 'input[type="file"]', function (e) {
-                //         var file = e.target.files[0],
-                //             reader = new FileReader(),
-                //             $preview = $(".preview");
-                //         t = this;
+                let imageUrl = '';
+                // 選択した画像を表示する
+                $(function () {
+                    //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
+                    $('form').on('change', 'input[type="file"]', function (e) {
+                        var file = e.target.files[0],
+                            reader = new FileReader(),
+                            $preview = $(".preview");
+                        t = this;
 
 
 
 
-                // ファイル読み込みが完了した際のイベント登録
-                //         reader.onload = (function (file) {
-                //             return function (e) {
-                //                 //既存のプレビューを削除
-                //                 $preview.empty();
-                //                 // .prevewの領域の中にロードした画像を表示するimageタグを追加
-                //                 // console.log(e.target.result)
+                        // ファイル読み込みが完了した際のイベント登録
+                        reader.onload = (function (file) {
+                            return function (e) {
+                                //既存のプレビューを削除
+                                $preview.empty();
+                                // .prevewの領域の中にロードした画像を表示するimageタグを追加
+                                // console.log(e.target.result)
 
 
-                //                 imageUrl = e.target.result;
-                //                 $preview.append($('<img>').attr({
-                //                     src: e.target.result,
-                //                     // width: "15%",
-                //                     // height: "15%",
-                //                     width: "150px",
-                //                     height: "150px",
-                //                     class: "preview",
-                //                     title: file.name
-                //                 }));
-                //             };
-                //         })(file);
+                                imageUrl = e.target.result;
+                                $preview.append($('<img>').attr({
+                                    src: e.target.result,
+                                    // width: "15%",
+                                    // height: "15%",
+                                    width: "150px",
+                                    height: "150px",
+                                    class: "preview",
+                                    title: file.name
+                                }));
+                            };
+                        })(file);
 
-                //         reader.readAsDataURL(file);
-                //     });
-                // });
-
-
-
-                var canvas;
-                var canvasW = 480;
-                var canvasH = 270;
-                var ctx;
-                var image_url;
-                var localImg;
-
-                window.onload = function () {
-                    init();
-                }
-
-                function init() {
-                    image_url = document.getElementById('image_url');
-                    canvas = document.getElementById('canvas');
-
-                    // input fileがあるか確認
-                    if (!image_url) {
-                        return false;
-                    };
-                    // canvasがあるかどうかとcanvasに対応したブラウザかを確認
-                    if (!canvas || !canvas.getContext) {
-                        select.style.display = "none";
-                        return false;
-                    };
-                    canvas.width = canvasW;
-                    canvas.height = canvasH;
-                    ctx = canvas.getContext('2d');
-                    // File APIに対応しているか確認
-                    if (!window.File) {
-                        return false;
-                    }
+                        reader.readAsDataURL(file);
+                    });
+                });
 
 
-                    let imageUrl = '';
-                    // ファイルが選択されたとき
-                    select.addEventListener('change', function (e) {
-                        // 選択されたファイルの情報を取得
-                        var fileData = e.target.files[0];
-                        var imgType = fileData.type;
+                // ---------------------
+                // fakepathのエラーが出る
+                // ---------------------
 
-                        // 選択されたファイルが画像かどうか確認
-                        if (!imgType.match(/^image/)) {
-                            alert('画像を選択してください');
-                            select.value = '';
-                            return;
-                        }
+                // var canvas;
+                // var canvasW = 480;
+                // var canvasH = 270;
+                // var ctx;
+                // var image_url;
+                // var localImg;
 
-                        var reader = new FileReader();
-                        // ファイル読み取りに失敗したとき
-                        reader.onerror = function () {
-                            alert('ファイル読み取りに失敗しました')
-                        }
-                        // ファイル読み取りに成功したとき
-                        reader.onload = function () {
-                            localImg = reader.result;
-                            draw();
-                        }
-                        // ファイル読み取りを実行
-                        reader.readAsDataURL(fileData);
-                    }, false);
-                }
+                // window.onload = function () {
+                //     init();
+                // }
 
-                function draw() {
-                    // canvas内の要素をクリアする
-                    ctx.clearRect(0, 0, canvasW, canvasH);
+                // function init() {
+                //     image_url = document.getElementById('image_url');
+                //     canvas = document.getElementById('canvas');
 
-                    var img = new Image();
-                    img.src = localImg;
-                    img.onload = function () {
-                        // 画像をcanvas内に収まるようにサイズ調整
-                        canvasW / canvasH
-                        this.width / this.height
-                        if (this.width / this.height > canvasW / canvasH) {
-                            // 幅に合わせて画像サイズ設定
-                            var imgWidth = canvasW;
-                            var imgHeight = Math.floor(this.height * (canvasW / this.width));
-                        } else {
-                            // 高さに合わせて画像サイズ設定
-                            imgHeight = canvasH;
-                            imgWidth = Math.floor(this.width * (canvasH / this.height));
-                        }
+                //     // input fileがあるか確認
+                //     if (!image_url) {
+                //         return false;
+                //     };
+                //     // canvasがあるかどうかとcanvasに対応したブラウザかを確認
+                //     if (!canvas || !canvas.getContext) {
+                //         select.style.display = "none";
+                //         return false;
+                //     };
+                //     canvas.width = canvasW;
+                //     canvas.height = canvasH;
+                //     ctx = canvas.getContext('2d');
+                //     // File APIに対応しているか確認
+                //     if (!window.File) {
+                //         return false;
+                //     }
 
-                        ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
-                    }
-                }
+
+                //     let imageUrl = '';
+                //     // ファイルが選択されたとき
+                //     select.addEventListener('change', function (e) {
+                //         // 選択されたファイルの情報を取得
+                //         var fileData = e.target.files[0];
+                //         var imgType = fileData.type;
+
+                //         // 選択されたファイルが画像かどうか確認
+                //         if (!imgType.match(/^image/)) {
+                //             alert('画像を選択してください');
+                //             select.value = '';
+                //             return;
+                //         }
+
+                //         var reader = new FileReader();
+                //         // ファイル読み取りに失敗したとき
+                //         reader.onerror = function () {
+                //             alert('ファイル読み取りに失敗しました')
+                //         }
+                //         // ファイル読み取りに成功したとき
+                //         reader.onload = function () {
+                //             localImg = reader.result;
+                //             draw();
+                //         }
+                //         // ファイル読み取りを実行
+                //         reader.readAsDataURL(fileData);
+                //     }, false);
+                // }
+
+                // function draw() {
+                //     // canvas内の要素をクリアする
+                //     ctx.clearRect(0, 0, canvasW, canvasH);
+
+                //     var img = new Image();
+                //     img.src = localImg;
+                //     img.onload = function () {
+                //         // 画像をcanvas内に収まるようにサイズ調整
+                //         canvasW / canvasH
+                //         this.width / this.height
+                //         if (this.width / this.height > canvasW / canvasH) {
+                //             // 幅に合わせて画像サイズ設定
+                //             var imgWidth = canvasW;
+                //             var imgHeight = Math.floor(this.height * (canvasW / this.width));
+                //         } else {
+                //             // 高さに合わせて画像サイズ設定
+                //             imgHeight = canvasH;
+                //             imgWidth = Math.floor(this.width * (canvasH / this.height));
+                //         }
+
+                //         ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
+                //     }
+                // }
 
 
 
@@ -544,7 +549,7 @@
                 // 投稿アイコンクリックで投稿
                 $('#post').on('click', function () {
                     const data = {
-                        img_url: $('#select').val(),
+                        img_url: imageUrl,
                         product_name: $('#product_name').val(),
                         created_at: getNowDatetime(),
                         category: $('.button1').val(),
